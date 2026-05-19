@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f5ede0" />
+  <title>Campedèl Hof · Speisekarte</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <template id="__bundler_thumbnail">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <rect width="100" height="100" fill="#0f2015"/>
+      <text x="50" y="44" text-anchor="middle" fill="#f5ede0" font-family="Manrope, sans-serif" font-weight="200" font-size="14" letter-spacing="-1">Campedèl</text>
+      <text x="50" y="64" text-anchor="middle" fill="#c9a227" font-family="JetBrains Mono, monospace" font-weight="700" font-size="9" letter-spacing="3">HOF</text>
+      <line x1="35" y1="74" x2="65" y2="74" stroke="#c9a227" stroke-width="0.6"/>
+    </svg>
+  </template>
+
+  <style>
+    *,*::before,*::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; background: #e8dec7; }
+    body {
+      font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      color: #1b1f17;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overscroll-behavior: none;
+    }
+    #root { width: 100%; min-height: 100%; }
+
+    /* ── App-level theme ── */
+    .mag-app { min-height: 100dvh; }
+    .mag-app.is-light .mag-screen { background: #f5ede0; color: #1b1f17; }
+    .mag-app.is-dark  .mag-screen { background: #0f2015; color: #f1e7d0; }
+
+    /* ── Mobile (full-bleed) ── */
+    .mag-mobile {
+      width: 100%; min-height: 100dvh;
+      overflow-y: auto; overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    .mag-mobile .mag-screen {
+      min-height: 100dvh;
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    .mag-mobile .mag-sticky {
+      position: sticky; top: env(safe-area-inset-top, 0);
+      z-index: 5;
+    }
+
+    /* ── Desktop (phone preview frame) ── */
+    .mag-desktop {
+      min-height: 100dvh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 32px 16px;
+      background:
+        radial-gradient(60% 60% at 50% 30%, rgba(255,255,255,.55), transparent 70%),
+        repeating-linear-gradient(135deg, transparent 0 18px, rgba(15,32,21,.04) 18px 19px);
+    }
+    .mag-app.is-dark .mag-desktop {
+      background:
+        radial-gradient(60% 60% at 50% 30%, rgba(255,255,255,.04), transparent 70%),
+        repeating-linear-gradient(135deg, transparent 0 18px, rgba(255,255,255,.03) 18px 19px),
+        #0a160d;
+    }
+    .mag-phone {
+      width: 390px; height: min(844px, calc(100dvh - 64px));
+      border-radius: 44px; padding: 6px;
+      background: #0a0d0a;
+      box-shadow: 0 24px 60px -22px rgba(15,32,21,.55), 0 8px 18px rgba(0,0,0,.18),
+                  inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    .mag-phone-screen {
+      width: 100%; height: 100%;
+      border-radius: 38px; overflow-y: auto; overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    .mag-desktop .mag-sticky {
+      position: sticky; top: 0; z-index: 5;
+    }
+
+    /* ── Theme toggle (floating, discrete) ── */
+    .mag-theme-toggle {
+      position: fixed; top: max(14px, env(safe-area-inset-top));
+      right: 14px; z-index: 50;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 0; cursor: pointer; padding: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(245,237,224,.0);
+      color: rgba(15,32,21,.55);
+      transition: background .15s, color .15s, transform .15s;
+    }
+    .mag-app.is-dark .mag-theme-toggle { color: rgba(241,231,208,.55); }
+    .mag-theme-toggle:hover { background: rgba(15,32,21,.06); color: #0f2015; transform: scale(1.05); }
+    .mag-app.is-dark .mag-theme-toggle:hover { background: rgba(241,231,208,.08); color: #f1e7d0; }
+    /* On desktop, place it inside the phone frame's column */
+    @media (min-width: 768px) {
+      .mag-theme-toggle { top: 28px; right: calc(50% - 195px + 14px); }
+    }
+
+    /* Avoid the menu sticky header sitting under the toggle */
+    .mag-sticky { /* no extra padding; toggle is on the side, not on top */ }
+
+    /* Buttons that wrap interactive rows shouldn't show outline rings */
+    button:focus-visible { outline: 2px solid #c9a227; outline-offset: 2px; border-radius: 4px; }
+  </style>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="data.jsx"></script>
+  <script type="text/babel" src="atoms.jsx"></script>
+  <script type="text/babel" src="screens.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+</body>
+</html>

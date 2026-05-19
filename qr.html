@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QR-Code · Campedèl Hof Speisekarte</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+          integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSe3Inhy1uqteNHJHQNSRQ+f0rMXQTLGmTqw=="
+          crossorigin="anonymous"></script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: #f5ede0;
+      color: #1b1f17;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 36px 36px;
+      box-shadow: 0 8px 32px rgba(15,32,21,.12), 0 2px 8px rgba(15,32,21,.06);
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+    }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: #c9a227;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 200;
+      letter-spacing: -.04em;
+      line-height: .95;
+      color: #0f2015;
+      margin-bottom: 2px;
+    }
+    h1 strong {
+      font-weight: 800;
+      font-style: italic;
+    }
+
+    .tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(15,32,21,.45);
+      margin-bottom: 28px;
+    }
+
+    .qr-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1.5px solid rgba(15,32,21,.1);
+      margin-bottom: 20px;
+    }
+
+    .qr-wrap canvas, .qr-wrap img {
+      display: block;
+      border-radius: 4px;
+    }
+
+    .cta {
+      font-size: 13px;
+      font-weight: 600;
+      color: #0f2015;
+      margin-bottom: 4px;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: rgba(15,32,21,.45);
+      line-height: 1.5;
+    }
+
+    .url-box {
+      margin-top: 18px;
+      padding: 10px 14px;
+      background: rgba(15,32,21,.04);
+      border-radius: 8px;
+      border: 1px solid rgba(15,32,21,.08);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(15,32,21,.55);
+      word-break: break-all;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: #c9a227;
+      opacity: .6;
+      margin: 20px auto;
+    }
+
+    .hours {
+      font-size: 11px;
+      color: rgba(15,32,21,.55);
+      line-height: 1.6;
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .card { box-shadow: none; border: 1px solid #ccc; }
+      .no-print { display: none !important; }
+    }
+
+    /* Admin notice shown only during local development */
+    .local-notice {
+      display: none;
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 8px;
+      font-size: 11px;
+      color: #856404;
+      line-height: 1.5;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="eyebrow">Digitale Speisekarte</div>
+    <h1>Campedèl<br><strong>Hof.</strong></h1>
+    <div class="tagline">Südtiroler Hofschank · seit 2019</div>
+
+    <div class="qr-wrap">
+      <div id="qrcode"></div>
+    </div>
+
+    <div class="cta">Kamera auf den Code richten</div>
+    <div class="hint">Kein Download, keine App — die Speisekarte öffnet sich direkt im Browser.</div>
+
+    <div class="url-box" id="url-display"></div>
+
+    <div class="local-notice" id="local-notice">
+      <strong>Hinweis (lokale Vorschau):</strong><br>
+      Der QR-Code zeigt gerade die lokale Adresse. Nach dem Deployment auf eine echte URL (z.&nbsp;B. Netlify) wird hier automatisch die richtige Web-Adresse eingetragen.
+    </div>
+
+    <div class="divider"></div>
+    <div class="hours">
+      Di – So &nbsp;·&nbsp; 11:30 – 22:00
+    </div>
+  </div>
+
+  <script>
+    // Derive the menu URL from the current location — works for any deployment.
+    // Strip "/qr.html" so the code points to the root of the site.
+    const base = window.location.origin + window.location.pathname.replace(/\/qr\.html$/i, '');
+    const menuUrl = base.endsWith('/') ? base : base + '/';
+
+    // Show URL below the QR code
+    document.getElementById('url-display').textContent = menuUrl;
+
+    // Show a notice when running locally (file:// or localhost)
+    if (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      document.getElementById('local-notice').style.display = 'block';
+    }
+
+    // Generate QR code
+    new QRCode(document.getElementById('qrcode'), {
+      text: menuUrl,
+      width: 200,
+      height: 200,
+      colorDark: '#0f2015',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H,
+    });
+  </script>
+
+</body>
+</html>
