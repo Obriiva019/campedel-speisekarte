@@ -110,12 +110,14 @@ function ImgPlaceholder({ caption, ratio = '4 / 3', tint = 'forest', radius = 4,
 }
 
 function Photo({ src, caption, ratio='4 / 3', radius = 4, style = {} }) {
+  const [err, setErr] = React.useState(false);
+  if (err) return <ImgPlaceholder caption={caption} ratio={ratio} radius={radius} style={style} />;
   return (
     <div style={{
       aspectRatio: ratio, width:'100%', borderRadius: radius, overflow:'hidden',
       position:'relative', background:'#1f3a29', ...style,
     }}>
-      <img src={src} alt={caption||''} style={{
+      <img src={src} alt={caption||''} onError={() => setErr(true)} style={{
         width:'100%', height:'100%', objectFit:'cover', display:'block',
       }}/>
       {caption && (
