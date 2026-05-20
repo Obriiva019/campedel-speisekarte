@@ -1,4 +1,4 @@
-// data.jsx — Speisekarte „Campedèl Hof"
+﻿// data.jsx — Speisekarte „Campedèl Hof"
 // Trilingual (DE/IT/EN) menu. Diet tags + origin flag for filtering & badges.
 
 const HOF_INTRO = {
@@ -204,36 +204,36 @@ const DRINKS = {
 
 const WINES = {
   bubbles: [
-    { name:'Arunda Brut',         maker:'Sektkellerei Arunda',         region:'Südtirol DOC · brut',                    grapes:'CH · PB · PN', sizes:[{s:'0,75 l', p:'39,00'}] },
-    { name:'Zemmer Millesimato',  maker:'Weingut Peter Zemmer',        region:'Vino Spumante di Qualità · brut',        grapes:'CH · RI',      sizes:[{s:'0,75 l', p:'29,00'},{s:'Glas', p:'5,00'}] },
+    { name:'Arunda Brut',         maker:'Sektkellerei Arunda',         region:'Südtirol DOC · brut',                    grapes:'CH · PB · PN', sizes:[{s:'0,75 l', p:'39,00'}], photo:'img/wein-weiss.jpg' },
+    { name:'Zemmer Millesimato',  maker:'Weingut Peter Zemmer',        region:'Vino Spumante di Qualità · brut',        grapes:'CH · RI',      sizes:[{s:'0,75 l', p:'29,00'},{s:'Glas', p:'5,00'}], photo:'img/wein-weiss.jpg' },
   ],
   white: [
-    { name:'Michelstrunk Weiss',  maker:'Kellerei St. Michael-Eppan',  region:'Vino Bianco d\u2019Italia · trocken',     house:true, sizes:[{s:'1,0 l', p:'18,00'},{s:'1/2 l', p:'10,00'},{s:'1/4 l', p:'5,50'},{s:'Glas', p:'2,70'}] },
-    { name:'T Cuvée Weiss',       maker:'Kellerei Tramin',             region:'Weinberge Dolomiten IGT · trocken',       grapes:'CH · SB · PB', sizes:[{s:'0,75 l', p:'26,00'},{s:'Glas', p:'5,00'}] },
-    { name:'Gewürztraminer',      maker:'Kellerei St. Michael-Eppan',  region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'29,00'}] },
-    { name:'Schulthaus Weissburgunder', maker:'Kellerei St. Michael-Eppan', region:'Südtirol DOC · trocken',             grapes:'Pinot Bianco', sizes:[{s:'0,75 l', p:'30,00'},{s:'Glas', p:'5,00'}] },
-    { name:'Sylvaner',            maker:'Weingut Taschlerhof',         region:'Südtirol Eisacktaler DOC · trocken',      sizes:[{s:'0,75 l', p:'32,00'}] },
-    { name:'Kerner',              maker:'Zu Tschötsch',                region:'Weinberge Dolomiten IGT · halbtrocken',   sizes:[{s:'0,75 l', p:'34,00'},{s:'Glas', p:'5,50'}] },
-    { name:'Sauvignon',           maker:'Weingut Putzenhof',           region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'30,00'},{s:'Glas', p:'5,00'}] },
-    { name:'Sanct Valentin Sauvignon', maker:'Kellerei St. Michael-Eppan', region:'Südtirol DOC · trocken',              sizes:[{s:'0,75 l', p:'41,00'}], note:'Falstaff 92 · Parker 93 · Suckling 93' },
-    { name:'Riesling',            maker:'Weingut Strasserhof',         region:'Südtirol Eisacktaler DOC · trocken',      sizes:[{s:'0,75 l', p:'33,00'}], note:'Falstaff 92' },
-    { name:'Fellis Chardonnay Riserva', maker:'Weingut Bessererhof',   region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'33,00'}] },
+    { name:'Michelstrunk Weiss',  maker:'Kellerei St. Michael-Eppan',  region:'Vino Bianco d\u2019Italia · trocken',     house:true, sizes:[{s:'1,0 l', p:'18,00'},{s:'1/2 l', p:'10,00'},{s:'1/4 l', p:'5,50'},{s:'Glas', p:'2,70'}], photo:'img/wein-weiss.jpg' },
+    { name:'T Cuvée Weiss',       maker:'Kellerei Tramin',             region:'Weinberge Dolomiten IGT · trocken',       grapes:'CH · SB · PB', sizes:[{s:'0,75 l', p:'26,00'},{s:'Glas', p:'5,00'}], photo:'img/wein-weiss.jpg' },
+    { name:'Gewürztraminer',      maker:'Kellerei St. Michael-Eppan',  region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'29,00'}], photo:'img/wein-weiss.jpg' },
+    { name:'Schulthaus Weissburgunder', maker:'Kellerei St. Michael-Eppan', region:'Südtirol DOC · trocken',             grapes:'Pinot Bianco', sizes:[{s:'0,75 l', p:'30,00'},{s:'Glas', p:'5,00'}], photo:'img/wein-weiss.jpg' },
+    { name:'Sylvaner',            maker:'Weingut Taschlerhof',         region:'Südtirol Eisacktaler DOC · trocken',      sizes:[{s:'0,75 l', p:'32,00'}], photo:'img/wein-weiss.jpg' },
+    { name:'Kerner',              maker:'Zu Tschötsch',                region:'Weinberge Dolomiten IGT · halbtrocken',   sizes:[{s:'0,75 l', p:'34,00'},{s:'Glas', p:'5,50'}], photo:'img/wein-weiss.jpg' },
+    { name:'Sauvignon',           maker:'Weingut Putzenhof',           region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'30,00'},{s:'Glas', p:'5,00'}], photo:'img/wein-weiss.jpg' },
+    { name:'Sanct Valentin Sauvignon', maker:'Kellerei St. Michael-Eppan', region:'Südtirol DOC · trocken',              sizes:[{s:'0,75 l', p:'41,00'}], note:'Falstaff 92 · Parker 93 · Suckling 93', photo:'img/wein-weiss.jpg' },
+    { name:'Riesling',            maker:'Weingut Strasserhof',         region:'Südtirol Eisacktaler DOC · trocken',      sizes:[{s:'0,75 l', p:'33,00'}], note:'Falstaff 92', photo:'img/wein-weiss.jpg' },
+    { name:'Fellis Chardonnay Riserva', maker:'Weingut Bessererhof',   region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'33,00'}], photo:'img/wein-weiss.jpg' },
   ],
   red: [
-    { name:'Michelstrunk Rot',    maker:'Kellerei St. Michael-Eppan',  region:'Vino Rosso d\u2019Italia · trocken',      house:true, sizes:[{s:'1,0 l', p:'18,00'},{s:'1/2 l', p:'10,00'},{s:'1/4 l', p:'5,50'},{s:'Glas', p:'2,70'}] },
-    { name:'Zeder',               maker:'Weingut Kornell',             region:'Südtirol DOC · trocken',                  grapes:'ME · CS · LA', sizes:[{s:'0,75 l', p:'30,00'},{s:'Glas', p:'5,00'}] },
-    { name:'Soma',                maker:'Kellerei Kurtatsch',          region:'Südtirol DOC · trocken',                  grapes:'ME · CF · CS', sizes:[{s:'0,75 l', p:'40,00'}] },
-    { name:'Cabernet Riserva',    maker:'Weingut Wassererhof',         region:'Südtirol DOC · trocken',                  grapes:'CS · CF', sizes:[{s:'0,75 l', p:'44,00'}], note:'Falstaff 93' },
-    { name:'St. Magdalener',      maker:'Kellerei St. Michael-Eppan',  region:'Südtirol DOC · trocken',                  grapes:'VT · LA', sizes:[{s:'0,75 l', p:'27,00'},{s:'Glas', p:'5,00'}] },
-    { name:'Roan Zweigelt',       maker:'Weingut Bessererhof',         region:'Weinberge Dolomiten IGT · trocken',       sizes:[{s:'0,75 l', p:'33,00'}] },
-    { name:'Pinot Noir',          maker:'Kellerei St. Michael-Eppan',  region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'30,00'},{s:'Glas', p:'5,00'}] },
-    { name:'Marith Blauburgunder',maker:'Weingut Kornell',             region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'34,00'}] },
-    { name:'Glen Blauburgunder Riserva', maker:'Kellerei Kurtatsch',   region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'39,00'}] },
-    { name:'Lagrein',             maker:'Kellerei St. Michael-Eppan',  region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'29,00'},{s:'Glas', p:'5,00'}] },
-    { name:'Karl Lagrein Riserva',maker:'Weingut Bergmannhof',         region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'42,00'}] },
-    { name:'Huberfeld Merlot',    maker:'Kellerei St. Pauls',          region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'31,00'}] },
-    { name:'Terre di San Leonardo',maker:'Tenuta San Leonardo, Trient',region:'Weinberge Dolomiten IGT · trocken',       grapes:'CS · ME · CRE', sizes:[{s:'0,75 l', p:'31,00'}] },
-    { name:'Amarone',             maker:'Casa Vinicola Bennati, Venetien', region:'Amarone d. Valpolicella DOCG · trocken', grapes:'CV · RON · MOL', sizes:[{s:'0,75 l', p:'40,00'}] },
+    { name:'Michelstrunk Rot',    maker:'Kellerei St. Michael-Eppan',  region:'Vino Rosso d\u2019Italia · trocken',      house:true, sizes:[{s:'1,0 l', p:'18,00'},{s:'1/2 l', p:'10,00'},{s:'1/4 l', p:'5,50'},{s:'Glas', p:'2,70'}], photo:'img/wein-rot.jpg' },
+    { name:'Zeder',               maker:'Weingut Kornell',             region:'Südtirol DOC · trocken',                  grapes:'ME · CS · LA', sizes:[{s:'0,75 l', p:'30,00'},{s:'Glas', p:'5,00'}], photo:'img/wein-rot.jpg' },
+    { name:'Soma',                maker:'Kellerei Kurtatsch',          region:'Südtirol DOC · trocken',                  grapes:'ME · CF · CS', sizes:[{s:'0,75 l', p:'40,00'}], photo:'img/wein-rot.jpg' },
+    { name:'Cabernet Riserva',    maker:'Weingut Wassererhof',         region:'Südtirol DOC · trocken',                  grapes:'CS · CF', sizes:[{s:'0,75 l', p:'44,00'}], note:'Falstaff 93', photo:'img/wein-rot.jpg' },
+    { name:'St. Magdalener',      maker:'Kellerei St. Michael-Eppan',  region:'Südtirol DOC · trocken',                  grapes:'VT · LA', sizes:[{s:'0,75 l', p:'27,00'},{s:'Glas', p:'5,00'}], photo:'img/wein-rot.jpg' },
+    { name:'Roan Zweigelt',       maker:'Weingut Bessererhof',         region:'Weinberge Dolomiten IGT · trocken',       sizes:[{s:'0,75 l', p:'33,00'}], photo:'img/wein-rot.jpg' },
+    { name:'Pinot Noir',          maker:'Kellerei St. Michael-Eppan',  region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'30,00'},{s:'Glas', p:'5,00'}], photo:'img/wein-rot.jpg' },
+    { name:'Marith Blauburgunder',maker:'Weingut Kornell',             region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'34,00'}], photo:'img/wein-rot.jpg' },
+    { name:'Glen Blauburgunder Riserva', maker:'Kellerei Kurtatsch',   region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'39,00'}], photo:'img/wein-rot.jpg' },
+    { name:'Lagrein',             maker:'Kellerei St. Michael-Eppan',  region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'29,00'},{s:'Glas', p:'5,00'}], photo:'img/wein-rot.jpg' },
+    { name:'Karl Lagrein Riserva',maker:'Weingut Bergmannhof',         region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'42,00'}], photo:'img/wein-rot.jpg' },
+    { name:'Huberfeld Merlot',    maker:'Kellerei St. Pauls',          region:'Südtirol DOC · trocken',                  sizes:[{s:'0,75 l', p:'31,00'}], photo:'img/wein-rot.jpg' },
+    { name:'Terre di San Leonardo',maker:'Tenuta San Leonardo, Trient',region:'Weinberge Dolomiten IGT · trocken',       grapes:'CS · ME · CRE', sizes:[{s:'0,75 l', p:'31,00'}], photo:'img/wein-rot.jpg' },
+    { name:'Amarone',             maker:'Casa Vinicola Bennati, Venetien', region:'Amarone d. Valpolicella DOCG · trocken', grapes:'CV · RON · MOL', sizes:[{s:'0,75 l', p:'40,00'}], photo:'img/wein-rot.jpg' },
   ],
 };
 
