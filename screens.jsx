@@ -608,7 +608,135 @@ function MagSpecials({ lang, setLang, dark, goTo }) {
   );
 }
 
-Object.assign(window, { MagLanding, MagMenu, MagDetail, MagSpecials, MagWines });
+// ────────────────────────────────────────────────────────────
+// 06 · Wine Detail
+// ────────────────────────────────────────────────────────────
+function MagWineDetail({ lang, setLang, dark, goTo, wineId, sectionId }) {
+  const t = makeT(lang);
+  const ink = dark ? '#f1e7d0' : PALETTE.forest;
+  const sub = dark ? 'rgba(237,228,207,.55)' : 'rgba(15,32,21,.55)';
+  const rule = dark ? 'rgba(255,255,255,.1)' : 'rgba(15,32,21,.12)';
+
+  const allWines = [...WINES.bubbles, ...WINES.white, ...WINES.red];
+  const w = allWines.find(x => x.id === wineId) || allWines[0];
+  const sec = WINE_SECTIONS.find(s => s.id === sectionId) || WINE_SECTIONS[0];
+
+  const HeroImg = w.photo
+    ? <Photo src={w.photo} ratio="4 / 3" radius={4} caption={`foto · ${w.name}`} />
+    : <ImgPlaceholder ratio="4 / 3" tint="forest" radius={4} caption={`foto · ${w.name}`} />;
+
+  return (
+    <div className="mag-screen">
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center',
+                    padding: '10px 16px 6px' }}>
+        <button onClick={() => goTo('wines', { open: sectionId })} style={{
+          all:'unset', cursor:'pointer', display:'inline-flex', alignItems:'center', gap: 6,
+          color: ink, fontSize: 12, fontWeight: 500,
+        }}>
+          {Icon.back(18)} <span>{L(t.back, lang)}</span>
+        </button>
+        <LangPicker dark={dark} value={lang} onChange={setLang} />
+      </div>
+
+      <div style={{ padding: '6px 22px 0' }}>
+        <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+          <span style={{ fontSize: 10, fontFamily:'"JetBrains Mono", monospace',
+                         letterSpacing:'.2em', textTransform:'uppercase',
+                         color: dark?PALETTE.gold:PALETTE.goldDeep }}>
+            {L(sec.name, lang)}
+          </span>
+          <span style={{ flex:1, height:1, background: rule }}/>
+        </div>
+
+        <h1 style={{ margin: '18px 0 0', fontWeight: 200, fontSize: 'clamp(28px, 9vw, 36px)', lineHeight: 1.02,
+                     letterSpacing:'-.04em', color: ink, textWrap:'balance' }}>
+          {w.name}
+        </h1>
+
+        <div style={{ marginTop: 6, fontSize: 14, fontStyle:'italic', color: sub }}>
+          {w.maker}
+        </div>
+
+        {w.house && (
+          <div style={{ marginTop: 10 }}>
+            <span style={{
+              fontSize: 10, fontWeight: 700, padding:'3px 8px', borderRadius: 6,
+              border: `1px solid ${dark?PALETTE.gold:PALETTE.goldDeep}`,
+              color: dark?PALETTE.gold:PALETTE.goldDeep,
+              fontFamily:'"JetBrains Mono", monospace', letterSpacing:'.06em', textTransform:'uppercase',
+            }}>
+              {lang==='it'?'Vino della casa':lang==='en'?'House wine':'Hauswein'}
+            </span>
+          </div>
+        )}
+      </div>
+
+      <div style={{ padding: '20px 22px 0' }}>{HeroImg}</div>
+
+      <div style={{ padding: '20px 22px 0' }}>
+        <div style={{ borderTop: `1px solid ${rule}`, borderBottom: `1px solid ${rule}`,
+                      padding: '14px 0', display:'grid', gridTemplateColumns:'1fr 1fr', gap: 10 }}>
+          <div>
+            <div style={{ fontSize: 9.5, letterSpacing:'.18em', textTransform:'uppercase',
+                          fontFamily:'"JetBrains Mono", monospace', color: sub }}>
+              {lang==='de'?'Herkunft':lang==='it'?'Origine':'Origin'}
+            </div>
+            <div style={{ marginTop: 6, fontSize: 12.5, lineHeight: 1.45, color: ink }}>
+              {w.region}
+            </div>
+          </div>
+          {w.grapes && (
+            <div>
+              <div style={{ fontSize: 9.5, letterSpacing:'.18em', textTransform:'uppercase',
+                            fontFamily:'"JetBrains Mono", monospace', color: sub }}>
+                {lang==='de'?'Rebsorten':lang==='it'?'Vitigni':'Grapes'}
+              </div>
+              <div style={{ marginTop: 6, fontSize: 12.5, lineHeight: 1.45, color: ink }}>
+                {w.grapes}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div style={{ padding: '20px 22px 0' }}>
+        <div style={{ fontSize: 9.5, letterSpacing:'.18em', textTransform:'uppercase',
+                      fontFamily:'"JetBrains Mono", monospace', color: sub, marginBottom: 8 }}>
+          {lang==='de'?'Preise':lang==='it'?'Prezzi':'Prices'}
+        </div>
+        {w.sizes.map((sz, j) => (
+          <div key={j} style={{
+            display:'flex', alignItems:'baseline', justifyContent:'space-between',
+            borderTop: `1px solid ${rule}`, paddingTop: 10, paddingBottom: 6,
+            fontFamily:'"JetBrains Mono", monospace', fontVariantNumeric:'tabular-nums',
+          }}>
+            <span style={{ fontSize: 12, color: sub, letterSpacing:'.04em' }}>{sz.s}</span>
+            <span style={{ fontSize: 20, fontWeight: 700,
+                           color: dark?PALETTE.gold:PALETTE.forest }}>
+              {sz.p}<span style={{ opacity:.5, fontWeight:400, fontSize: 13 }}> €</span>
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {w.note && (
+        <div style={{ padding: '16px 22px 0' }}>
+          <div style={{ borderTop: `1px solid ${rule}`, paddingTop: 14 }}>
+            <span style={{ fontSize: 11, fontWeight: 600, letterSpacing:'.08em',
+                           color: dark?PALETTE.gold:PALETTE.goldDeep,
+                           fontFamily:'"JetBrains Mono", monospace', textTransform:'uppercase' }}>
+              ★ {w.note}
+            </span>
+          </div>
+        </div>
+      )}
+
+      <div style={{ height: 40 }}/>
+    </div>
+  );
+}
+
+Object.assign(window, { MagLanding, MagMenu, MagDetail, MagSpecials, MagWines, MagWineDetail });
 
 // ────────────────────────────────────────────────────────────
 // 05 · Wein & Getränke
@@ -635,8 +763,8 @@ const WINE_SECTIONS = [
     name: { de:'Digestif',       it:'Digestivi',         en:'Digestifs'   } },
 ];
 
-function MagWines({ lang, setLang, dark, goTo }) {
-  const [open, setOpen] = React.useState('white');
+function MagWines({ lang, setLang, dark, goTo, initialOpen }) {
+  const [open, setOpen] = React.useState(initialOpen || 'white');
   const t = makeT(lang);
 
   const ink = dark ? '#f1e7d0' : PALETTE.forest;
@@ -737,7 +865,7 @@ function MagWines({ lang, setLang, dark, goTo }) {
               {isOpen && (
                 <div style={{ padding: '0 18px 24px' }}>
                   {sec.kind === 'wine' && (
-                    <WineList items={items} sectionIndex={si} dark={dark} lang={lang} sub={sub} ink={ink} rule={rule} />
+                    <WineList items={items} sectionIndex={si} dark={dark} lang={lang} sub={sub} ink={ink} rule={rule} goTo={goTo} sectionId={sec.id} />
                   )}
                   {sec.kind === 'simple' && (
                     <SimpleDrinkList items={items} sectionIndex={si} dark={dark} lang={lang} sub={sub} ink={ink} rule={rule} />
@@ -782,11 +910,12 @@ function MagWines({ lang, setLang, dark, goTo }) {
 }
 
 // ─── Wine row (with possible multiple sizes) ───────────────
-function WineList({ items, sectionIndex, dark, lang, sub, ink, rule }) {
+function WineList({ items, sectionIndex, dark, lang, sub, ink, rule, goTo, sectionId }) {
   return (
     <div>
       {items.map((w, i) => (
-        <div key={w.name + i} style={{
+        <button key={w.id || w.name + i} onClick={() => goTo('wine-detail', { wineId: w.id, sectionId })} style={{
+          all:'unset', cursor:'pointer', width:'100%', boxSizing:'border-box',
           display:'grid', gridTemplateColumns: '28px 1fr auto',
           gap: 14, alignItems:'baseline',
           padding: '14px 0', borderTop: `1px solid ${rule}`,
@@ -846,7 +975,7 @@ function WineList({ items, sectionIndex, dark, lang, sub, ink, rule }) {
               </div>
             ))}
           </div>
-        </div>
+        </button>
       ))}
     </div>
   );

@@ -65,10 +65,11 @@ function App() {
   const screenEl = (() => {
     const props = { lang, setLang, dark, goTo };
     switch (route.screen) {
-      case 'menu':     return <MagMenu     {...props} initialOpen={route.params.open} />;
-      case 'detail':   return <MagDetail   {...props} itemId={route.params.itemId} catId={route.params.catId} />;
-      case 'specials': return <MagSpecials {...props} />;
-      case 'wines':    return <MagWines    {...props} />;
+      case 'menu':        return <MagMenu       {...props} initialOpen={route.params.open} />;
+      case 'detail':      return <MagDetail     {...props} itemId={route.params.itemId} catId={route.params.catId} />;
+      case 'specials':    return <MagSpecials   {...props} />;
+      case 'wines':       return <MagWines      {...props} initialOpen={route.params.open} />;
+      case 'wine-detail': return <MagWineDetail {...props} wineId={route.params.wineId} sectionId={route.params.sectionId} />;
       case 'landing':
       default:         return <MagLanding  {...props} />;
     }
