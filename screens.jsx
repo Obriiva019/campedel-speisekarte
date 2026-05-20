@@ -736,7 +736,114 @@ function MagWineDetail({ lang, setLang, dark, goTo, wineId, sectionId }) {
   );
 }
 
-Object.assign(window, { MagLanding, MagMenu, MagDetail, MagSpecials, MagWines, MagWineDetail });
+// ────────────────────────────────────────────────────────────
+// 07 · Drink Detail
+// ────────────────────────────────────────────────────────────
+function MagDrinkDetail({ lang, setLang, dark, goTo, drinkId, sectionId }) {
+  const t = makeT(lang);
+  const ink = dark ? '#f1e7d0' : PALETTE.forest;
+  const sub = dark ? 'rgba(237,228,207,.55)' : 'rgba(15,32,21,.55)';
+  const rule = dark ? 'rgba(255,255,255,.1)' : 'rgba(15,32,21,.12)';
+
+  const sec = WINE_SECTIONS.find(s => s.id === sectionId) || WINE_SECTIONS[3];
+  const rawData = sec.data();
+  const isGrid = sec.kind === 'grid';
+  const allItems = isGrid ? rawData.items : rawData;
+  const drink = allItems.find(d => d.id === drinkId) || allItems[0];
+  const sizes = isGrid ? rawData.sizes : null;
+
+  return (
+    <div className="mag-screen">
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center',
+                    padding: '10px 16px 6px' }}>
+        <button onClick={() => goTo('wines', { open: sectionId })} style={{
+          all:'unset', cursor:'pointer', display:'inline-flex', alignItems:'center', gap: 6,
+          color: ink, fontSize: 12, fontWeight: 500,
+        }}>
+          {Icon.back(18)} <span>{L(t.back, lang)}</span>
+        </button>
+        <LangPicker dark={dark} value={lang} onChange={setLang} />
+      </div>
+
+      <div style={{ padding: '6px 22px 0' }}>
+        <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+          <span style={{ fontSize: 10, fontFamily:'"JetBrains Mono", monospace',
+                         letterSpacing:'.2em', textTransform:'uppercase',
+                         color: dark?PALETTE.gold:PALETTE.goldDeep }}>
+            {L(sec.name, lang)}
+          </span>
+          <span style={{ flex:1, height:1, background: rule }}/>
+        </div>
+
+        <h1 style={{ margin: '18px 0 0', fontWeight: 200, fontSize: 'clamp(28px, 9vw, 36px)', lineHeight: 1.02,
+                     letterSpacing:'-.04em', color: ink, textWrap:'balance' }}>
+          {L(drink.n, lang)}
+        </h1>
+
+        <div style={{ marginTop: 6, fontSize: 12, fontStyle:'italic', color: sub, lineHeight: 1.5 }}>
+          {['de','it','en'].filter(l => l !== lang && L(drink.n, l) !== L(drink.n, lang)).map(l => (
+            <div key={l}>{L(drink.n, l)}</div>
+          ))}
+        </div>
+
+        {drink.sig && (
+          <div style={{ marginTop: 10 }}>
+            <span style={{
+              fontSize: 10, fontWeight: 700, padding:'3px 8px', borderRadius: 6,
+              border: `1px solid ${dark?PALETTE.gold:PALETTE.goldDeep}`,
+              color: dark?PALETTE.gold:PALETTE.goldDeep,
+              fontFamily:'"JetBrains Mono", monospace', letterSpacing:'.06em', textTransform:'uppercase',
+            }}>
+              ★ {lang==='de'?'Hauskreation':lang==='it'?'Creazione della casa':'House special'}
+            </span>
+          </div>
+        )}
+      </div>
+
+      <div style={{ padding: '20px 22px 0' }}>
+        <Photo src={drink.photo} ratio="4 / 3" radius={4} caption={`foto · ${L(drink.n, lang)}`} />
+      </div>
+
+      <div style={{ padding: '20px 22px 0' }}>
+        <div style={{ fontSize: 9.5, letterSpacing:'.18em', textTransform:'uppercase',
+                      fontFamily:'"JetBrains Mono", monospace', color: sub, marginBottom: 8 }}>
+          {lang==='de'?'Preise':lang==='it'?'Prezzi':'Prices'}
+        </div>
+        {sizes ? (
+          sizes.map((sz, j) => (
+            <div key={j} style={{
+              display:'flex', alignItems:'baseline', justifyContent:'space-between',
+              borderTop: `1px solid ${rule}`, paddingTop: 10, paddingBottom: 6,
+              fontFamily:'"JetBrains Mono", monospace', fontVariantNumeric:'tabular-nums',
+            }}>
+              <span style={{ fontSize: 12, color: sub }}>{sz}</span>
+              <span style={{ fontSize: 20, fontWeight: 700, color: dark?PALETTE.gold:PALETTE.forest }}>
+                {drink.p[j]}<span style={{ opacity:.5, fontWeight:400, fontSize: 13 }}> €</span>
+              </span>
+            </div>
+          ))
+        ) : (
+          <div style={{
+            borderTop: `1px solid ${rule}`, paddingTop: 10,
+            display:'flex', alignItems:'baseline', justifyContent:'space-between',
+            fontFamily:'"JetBrains Mono", monospace', fontVariantNumeric:'tabular-nums',
+          }}>
+            <span style={{ fontSize: 12, color: sub }}>
+              {lang==='de'?'pro Glas':lang==='it'?'al bicchiere':'per glass'}
+            </span>
+            <span style={{ fontSize: 24, fontWeight: 700, color: dark?PALETTE.gold:PALETTE.forest }}>
+              {drink.p}<span style={{ opacity:.5, fontWeight:400, fontSize: 14 }}> €</span>
+            </span>
+          </div>
+        )}
+      </div>
+
+      <div style={{ height: 40 }}/>
+    </div>
+  );
+}
+
+Object.assign(window, { MagLanding, MagMenu, MagDetail, MagSpecials, MagWines, MagWineDetail, MagDrinkDetail });
 
 // ────────────────────────────────────────────────────────────
 // 05 · Wein & Getränke
@@ -868,10 +975,10 @@ function MagWines({ lang, setLang, dark, goTo, initialOpen }) {
                     <WineList items={items} sectionIndex={si} dark={dark} lang={lang} sub={sub} ink={ink} rule={rule} goTo={goTo} sectionId={sec.id} />
                   )}
                   {sec.kind === 'simple' && (
-                    <SimpleDrinkList items={items} sectionIndex={si} dark={dark} lang={lang} sub={sub} ink={ink} rule={rule} />
+                    <SimpleDrinkList items={items} sectionIndex={si} dark={dark} lang={lang} sub={sub} ink={ink} rule={rule} goTo={goTo} sectionId={sec.id} />
                   )}
                   {sec.kind === 'grid' && (
-                    <GridDrinkList block={items} sectionIndex={si} dark={dark} lang={lang} sub={sub} ink={ink} rule={rule} />
+                    <GridDrinkList block={items} sectionIndex={si} dark={dark} lang={lang} sub={sub} ink={ink} rule={rule} goTo={goTo} sectionId={sec.id} />
                   )}
                 </div>
               )}
@@ -982,11 +1089,12 @@ function WineList({ items, sectionIndex, dark, lang, sub, ink, rule, goTo, secti
 }
 
 // ─── Simple drink list (single price column) ───────────────
-function SimpleDrinkList({ items, sectionIndex, dark, lang, sub, ink, rule }) {
+function SimpleDrinkList({ items, sectionIndex, dark, lang, sub, ink, rule, goTo, sectionId }) {
   return (
     <div>
       {items.map((d, i) => (
-        <div key={i} style={{
+        <button key={d.id || i} onClick={() => goTo('drink-detail', { drinkId: d.id, sectionId })} style={{
+          all:'unset', cursor:'pointer', width:'100%', boxSizing:'border-box',
           display:'grid', gridTemplateColumns: '28px 1fr auto',
           gap: 14, alignItems:'baseline',
           padding: '12px 0', borderTop: `1px solid ${rule}`,
@@ -1020,14 +1128,14 @@ function SimpleDrinkList({ items, sectionIndex, dark, lang, sub, ink, rule }) {
                         whiteSpace:'nowrap' }}>
             {d.p}<span style={{ opacity:.55, fontWeight:400, fontSize: 11 }}> €</span>
           </div>
-        </div>
+        </button>
       ))}
     </div>
   );
 }
 
 // ─── Grid drink list (sizes header + price columns) ────────
-function GridDrinkList({ block, sectionIndex, dark, lang, sub, ink, rule }) {
+function GridDrinkList({ block, sectionIndex, dark, lang, sub, ink, rule, goTo, sectionId }) {
   const sizes = block.sizes;
   const items = block.items;
   return (
@@ -1049,7 +1157,8 @@ function GridDrinkList({ block, sectionIndex, dark, lang, sub, ink, rule }) {
         ))}
       </div>
       {items.map((d, i) => (
-        <div key={i} style={{
+        <button key={d.id || i} onClick={() => goTo('drink-detail', { drinkId: d.id, sectionId })} style={{
+          all:'unset', cursor:'pointer', width:'100%', boxSizing:'border-box',
           display:'grid', gridTemplateColumns: `28px 1fr repeat(${sizes.length}, minmax(46px, auto))`,
           gap: 14, alignItems:'baseline',
           padding: '12px 0', borderTop: `1px solid ${rule}`,
@@ -1075,7 +1184,7 @@ function GridDrinkList({ block, sectionIndex, dark, lang, sub, ink, rule }) {
               {price}<span style={{ opacity:.5, fontWeight:400, fontSize: 10 }}> €</span>
             </span>
           ))}
-        </div>
+        </button>
       ))}
     </div>
   );

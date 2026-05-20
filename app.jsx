@@ -69,7 +69,8 @@ function App() {
       case 'detail':      return <MagDetail     {...props} itemId={route.params.itemId} catId={route.params.catId} />;
       case 'specials':    return <MagSpecials   {...props} />;
       case 'wines':       return <MagWines      {...props} initialOpen={route.params.open} />;
-      case 'wine-detail': return <MagWineDetail {...props} wineId={route.params.wineId} sectionId={route.params.sectionId} />;
+      case 'wine-detail':  return <MagWineDetail  {...props} wineId={route.params.wineId}   sectionId={route.params.sectionId} />;
+      case 'drink-detail': return <MagDrinkDetail {...props} drinkId={route.params.drinkId} sectionId={route.params.sectionId} />;
       case 'landing':
       default:         return <MagLanding  {...props} />;
     }
