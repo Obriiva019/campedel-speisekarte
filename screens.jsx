@@ -47,11 +47,6 @@ function MagLanding({ lang, setLang, dark, goTo }) {
       </div>
 
       <div style={{ padding: '20px 22px 0' }}>
-        <ImgPlaceholder ratio="3 / 2" tint={dark?'forest':'stone'} radius={4}
-          caption={lang==='de'?'foto · der hof am abend':lang==='it'?'foto · il maso di sera':'photo · the farm at dusk'} />
-      </div>
-
-      <div style={{ padding: '20px 22px 0' }}>
         <p style={{ margin: 0, fontWeight: 200, fontSize: 17, lineHeight: 1.32, letterSpacing:'-.005em',
                     textWrap:'pretty', color: ink, fontStyle:'italic' }}>
           „{lang==='de'?'Saftige Wiesen, herrliche Aussicht, gutes Essen und ausgezeichneter Wein.'
