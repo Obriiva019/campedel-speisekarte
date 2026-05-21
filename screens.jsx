@@ -149,6 +149,14 @@ function MagLanding({ lang, setLang, dark, goTo }) {
                       letterSpacing:'.2em', textTransform:'uppercase', color: sub }}>
           {L(t.hours, lang)}
         </div>
+        <button onClick={() => goTo('admin')} style={{
+          all:'unset', cursor:'pointer', display:'block', textAlign:'center',
+          marginTop: 18, fontSize: 9, fontFamily:'"JetBrains Mono", monospace',
+          letterSpacing:'.16em', textTransform:'uppercase',
+          color: dark ? 'rgba(241,231,208,.18)' : 'rgba(15,32,21,.18)',
+        }}>
+          ⬡ Admin
+        </button>
       </div>
     </div>
   );

@@ -393,3 +393,15 @@ const SPECIALS = {
 };
 
 Object.assign(window, { MENU: CATEGORIES, CATEGORIES, DRINKS, WINES, WINE_LEGEND, SPECIALS, UI_STRINGS, HOF_INTRO });
+
+// Apply admin overrides from localStorage
+try {
+  const _adminData = localStorage.getItem('campedel:admin-data');
+  if (_adminData) {
+    const _d = JSON.parse(_adminData);
+    if (_d.MENU)     { window.MENU = _d.MENU; window.CATEGORIES = _d.MENU; }
+    if (_d.SPECIALS) window.SPECIALS = _d.SPECIALS;
+    if (_d.WINES)    window.WINES    = _d.WINES;
+    if (_d.DRINKS)   window.DRINKS   = _d.DRINKS;
+  }
+} catch (_) {}

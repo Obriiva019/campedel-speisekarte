@@ -71,6 +71,7 @@ function App() {
       case 'wines':       return <MagWines      {...props} initialOpen={route.params.open} />;
       case 'wine-detail':  return <MagWineDetail  {...props} wineId={route.params.wineId}   sectionId={route.params.sectionId} />;
       case 'drink-detail': return <MagDrinkDetail {...props} drinkId={route.params.drinkId} sectionId={route.params.sectionId} />;
+      case 'admin':        return <AdminPanel onExit={back} />;
       case 'landing':
       default:         return <MagLanding  {...props} />;
     }
