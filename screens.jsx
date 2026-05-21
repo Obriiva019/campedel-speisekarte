@@ -93,7 +93,7 @@ function MagLanding({ lang, setLang, dark, goTo }) {
         </div>
       </div>
 
-      <div style={{ padding: '24px 22px 22px', display:'flex', flexDirection:'column', gap: 10 }}>
+      <div style={{ padding: '24px 22px 80px', display:'flex', flexDirection:'column', gap: 10 }}>
         <button onClick={() => goTo('menu')} style={{
           width:'100%', padding:'16px 18px', borderRadius: 4, border: `1px solid ${ink}`,
           background: ink, color: dark?PALETTE.forest:'#fbf6ec',
@@ -153,7 +153,7 @@ function MagLanding({ lang, setLang, dark, goTo }) {
           all:'unset', cursor:'pointer', display:'block', textAlign:'center',
           marginTop: 18, fontSize: 9, fontFamily:'"JetBrains Mono", monospace',
           letterSpacing:'.16em', textTransform:'uppercase',
-          color: dark ? 'rgba(241,231,208,.18)' : 'rgba(15,32,21,.18)',
+          color: dark ? 'rgba(241,231,208,.28)' : 'rgba(15,32,21,.28)',
         }}>
           ⬡ Admin
         </button>
