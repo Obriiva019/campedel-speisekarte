@@ -16,10 +16,13 @@ function MagLanding({ lang, setLang, dark, goTo }) {
       <div style={{ padding: '14px 18px 0',
                     display:'flex', justifyContent:'space-between', alignItems:'center',
                     borderBottom: `1px solid ${rule}`, paddingBottom: 10 }}>
-        <span style={{ fontSize: 9, letterSpacing:'.24em', textTransform:'uppercase',
-                       fontFamily:'"JetBrains Mono", monospace', color: sub }}>
+        <button onClick={() => goTo('admin')} style={{
+          all:'unset', cursor:'pointer',
+          fontSize: 9, letterSpacing:'.24em', textTransform:'uppercase',
+          fontFamily:'"JetBrains Mono", monospace', color: sub,
+        }}>
           №01 · {L(t.season, lang)}
-        </span>
+        </button>
         <LangPicker dark={dark} value={lang} onChange={setLang} />
       </div>
 
@@ -149,14 +152,6 @@ function MagLanding({ lang, setLang, dark, goTo }) {
                       letterSpacing:'.2em', textTransform:'uppercase', color: sub }}>
           {L(t.hours, lang)}
         </div>
-        <button onClick={() => goTo('admin')} style={{
-          all:'unset', cursor:'pointer', display:'block', textAlign:'center',
-          marginTop: 18, fontSize: 9, fontFamily:'"JetBrains Mono", monospace',
-          letterSpacing:'.16em', textTransform:'uppercase',
-          color: dark ? 'rgba(241,231,208,.28)' : 'rgba(15,32,21,.28)',
-        }}>
-          ⬡ Admin
-        </button>
       </div>
     </div>
   );
