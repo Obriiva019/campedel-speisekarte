@@ -86,7 +86,7 @@
     /* ── Theme toggle (floating, discrete) ── */
     .mag-theme-toggle {
       position: fixed; top: max(14px, env(safe-area-inset-top));
-      right: 14px; z-index: 50;
+      left: 14px; z-index: 50;
       width: 36px; height: 36px; border-radius: 50%;
       border: 0; cursor: pointer; padding: 0;
       display: flex; align-items: center; justify-content: center;
@@ -99,7 +99,7 @@
     .mag-app.is-dark .mag-theme-toggle:hover { background: rgba(241,231,208,.08); color: #f1e7d0; }
     /* On desktop, place it inside the phone frame's column */
     @media (min-width: 768px) {
-      .mag-theme-toggle { top: 28px; right: calc(50% - 195px + 14px); }
+      .mag-theme-toggle { top: 28px; left: calc(50% - 195px + 14px); }
     }
 
     /* Avoid the menu sticky header sitting under the toggle */
